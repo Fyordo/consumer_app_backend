@@ -20,6 +20,8 @@ class Flat extends BaseModel
         'living_space',
         'room_count',
         'balconyless_space',
+        'residential_complex_id',
+        'cost',
     ];
 
     protected $appends = [

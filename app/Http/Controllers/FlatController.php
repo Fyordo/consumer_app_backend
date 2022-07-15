@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\FlatManager;
 use App\Http\Requests\FlatRequest;
 use App\Http\Resources\FlatResource;
 use App\Models\Flat;
@@ -114,6 +115,7 @@ class FlatController extends Controller
                     'room_count' => $request->room_count,
                     'balconyless_space' => $request->balconyless_space,
                     'residential_complex_id' => $request->residential_complex_id,
+                    'cost' => $request->cost,
                 ]);
                 return (new FlatResource($flatModel))->additional($this->metaData(request()));
             } else {
@@ -142,6 +144,24 @@ class FlatController extends Controller
             if ($flatModel) {
                 $flatModel->delete();
                 return response()->json([], 400);
+            } else {
+                return response()->json([
+                    'error' => 'Object doesn\'t exist'
+                ], 403);
+            }
+        }
+        catch (\Exception $ex){
+            return response()->json([
+                'error' => $ex->getMessage()
+            ]);
+        }
+    }
+
+    public function graph($flat){
+        try {
+            $flat = Flat::where('id', '=', $flat)->first();
+            if ($flat) {
+                return FlatManager::getGraph($flat);
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
