@@ -10,7 +10,7 @@ class Client extends BaseModel
 {
     use HasFactory;
 
-    protected $table = 'clients';
+    protected $table = 'client';
 
     protected $fillable = [
         'name',
