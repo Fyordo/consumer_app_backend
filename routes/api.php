@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware([\App\Http\Middleware\AuthUser::class])->group(function () {
-    include "chat/chat.php";
+    include "api/chat.php";
+    include "api/message.php";
 });
