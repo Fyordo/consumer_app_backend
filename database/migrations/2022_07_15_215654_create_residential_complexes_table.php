@@ -22,7 +22,7 @@ class CreateResidentialComplexesTable extends Migration
         });
 
         Schema::table('flats', function (Blueprint $table){
-            $table->integer('residential_complex_id')->unsigned();
+            $table->integer('residential_complex_id')->unsigned()->default(0);
         });
     }
 
