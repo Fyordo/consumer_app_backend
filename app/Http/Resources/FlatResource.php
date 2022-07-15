@@ -23,6 +23,9 @@ class FlatResource extends JsonResource
             'living_space' => $this->living_space,
             'room_count' => $this->room_count,
             'balconyless_space' => $this->balconyless_space,
+            'residential_complex_id' => $this->residential_complex_id,
+            'cost' => $this->cost,
+            'is_ready' => (bool)$this->is_ready,
         ];
     }
 }

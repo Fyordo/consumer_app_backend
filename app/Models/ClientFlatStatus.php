@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FlatStatus extends BaseModel
+class ClientFlatStatus extends BaseModel
 {
     use HasFactory;
+
+    protected $table = 'client_flat_status';
 
     protected $fillable = [
         'title'

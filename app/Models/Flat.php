@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
-class Flat extends Model
+class Flat extends BaseModel
 {
     use HasFactory;
 
@@ -19,6 +20,9 @@ class Flat extends Model
         'living_space',
         'room_count',
         'balconyless_space',
+        'residential_complex_id',
+        'cost',
+        'is_ready',
     ];
 
     protected $appends = [

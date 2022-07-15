@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\ClientManager;
-use App\Http\Requests\ClientRequest;
-use App\Http\Resources\ClientResource;
-use App\Models\Client;
-use App\Models\User;
+use App\Http\Requests\ResidentialComplexRequest;
+use App\Http\Resources\ResidentialComplexResource;
+use App\Models\ResidentialComplex;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Nette\NotImplementedException;
 
-class ClientController extends Controller
+class ResidentialComplexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +19,7 @@ class ClientController extends Controller
     {
         $filter = request()->all();
         try {
-            return ClientResource::collection(Client::where($filter)->get())
+            return ResidentialComplexResource::collection(ResidentialComplex::filter($filter)->order($filter)->get())
                 ->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
@@ -36,10 +32,10 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ClientRequest  $request
-     * @return ClientResource|JsonResponse
+     * @param  ResidentialComplexRequest  $request
+     * @return ResidentialComplexResource|JsonResponse
      */
-    public function store(ClientRequest $request)
+    public function store(ResidentialComplexRequest $request)
     {
         try {
             $validated = $request->validated();
@@ -47,18 +43,12 @@ class ClientController extends Controller
                 return response()->json(['error' => $validated], 403);
             }
 
-            $user = User::create([
-                'email' => $request->email,
-                'password' => 'password'
+            $complexModel = ResidentialComplex::create([
+                'title' => $request->title,
+                'address' => $request->address
             ]);
 
-            $clientModel = Client::create([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'user_id' => $user->id,
-            ]);
-
-            return (new ClientResource($clientModel))->additional($this->metaData(request()));
+            return (new ResidentialComplexResource($complexModel))->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
             return response()->json([
@@ -70,15 +60,15 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $client
-     * @return ClientResource|JsonResponse
+     * @param  int  $complex
+     * @return ResidentialComplexResource|JsonResponse
      */
-    public function show($client)
+    public function show($complex)
     {
         try {
-            $clientModel = Client::where('id', '=', $client)->first();
-            if ($clientModel) {
-                return (new ClientResource($clientModel))->additional($this->metaData(request()));
+            $complexModel = ResidentialComplex::where('id', '=', $complex)->first();
+            if ($complexModel) {
+                return (new ResidentialComplexResource($complexModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
@@ -95,11 +85,11 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ClientRequest  $request
-     * @param  int  $client
-     * @return ClientResource|JsonResponse
+     * @param  ResidentialComplexRequest  $request
+     * @param  int  $complex
+     * @return ResidentialComplexResource|JsonResponse
      */
-    public function update(ClientRequest $request, $client)
+    public function update(ResidentialComplexRequest $request, $complex)
     {
         try {
             $validated = $request->validated();
@@ -107,16 +97,13 @@ class ClientController extends Controller
                 return response()->json(['error' => $validated], 403);
             }
 
-            $clientModel = Client::where('id', '=', $client)->first();
-            if ($clientModel) {
-                $clientModel->update([
-                    'name' => $request->name,
-                    'phone' => $request->phone,
+            $complexModel = ResidentialComplex::where('id', '=', $complex)->first();
+            if ($complexModel) {
+                $complexModel->update([
+                    'title' => $request->title,
+                    'address' => $request->address
                 ]);
-                $clientModel->user->update([
-                    'email' => $request->email,
-                ]);
-                return (new ClientResource($clientModel))->additional($this->metaData(request()));
+                return (new ResidentialComplexResource($complexModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
@@ -133,15 +120,15 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $client
+     * @param  int  $complex
      * @return JsonResponse
      */
-    public function destroy($client)
+    public function destroy($complex)
     {
         try {
-            $clientModel = Client::where('id', '=', $client)->first();
-            if ($clientModel) {
-                $clientModel->delete();
+            $complexModel = ResidentialComplex::where('id', '=', $complex)->first();
+            if ($complexModel) {
+                $complexModel->delete();
                 return response()->json([], 400);
             } else {
                 return response()->json([
@@ -154,9 +141,5 @@ class ClientController extends Controller
                 'error' => $ex->getMessage()
             ]);
         }
-    }
-
-    public function getMyFlats(){
-        return ClientManager::getFlats(Client::where('client.user_id', '=', Auth::id())->first());
     }
 }

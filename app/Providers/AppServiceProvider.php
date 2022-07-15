@@ -14,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(ClientServiceProvider::class);
+        $this->app->register(FlatServiceProvider::class);
     }
 
     /**
@@ -24,8 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*if (env("APP_DEBUG")){
-            URL::forceScheme('https');
-        }*/
+        //
     }
 }

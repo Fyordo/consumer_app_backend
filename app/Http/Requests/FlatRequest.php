@@ -31,6 +31,9 @@ class FlatRequest extends FormRequest
             'living_space' => 'float|required',
             'room_count' => 'integer|required',
             'balconyless_space' => 'float|required',
+            'residential_complex_id' => 'integer|required',
+            'cost' => 'integer',
+            'is_ready' => 'boolean',
         ];
     }
 }

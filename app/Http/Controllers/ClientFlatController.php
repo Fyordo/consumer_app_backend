@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\ClientManager;
-use App\Http\Requests\ClientRequest;
-use App\Http\Resources\ClientResource;
-use App\Models\Client;
-use App\Models\User;
+use App\Http\Requests\ClientFlatRequest;
+use App\Http\Resources\ClientFlatResource;
+use App\Models\ClientFlat;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Nette\NotImplementedException;
 
-class ClientController extends Controller
+class ClientFlatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +19,7 @@ class ClientController extends Controller
     {
         $filter = request()->all();
         try {
-            return ClientResource::collection(Client::where($filter)->get())
+            return ClientFlatResource::collection(ClientFlat::where($filter)->get())
                 ->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
@@ -36,10 +32,10 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ClientRequest  $request
-     * @return ClientResource|JsonResponse
+     * @param  ClientFlatRequest  $request
+     * @return ClientFlatResource|JsonResponse
      */
-    public function store(ClientRequest $request)
+    public function store(ClientFlatRequest $request)
     {
         try {
             $validated = $request->validated();
@@ -47,18 +43,13 @@ class ClientController extends Controller
                 return response()->json(['error' => $validated], 403);
             }
 
-            $user = User::create([
-                'email' => $request->email,
-                'password' => 'password'
+            $clientFlatModel = ClientFlat::create([
+                'client_id' => $request->client_id,
+                'flat_id' => $request->flat_id,
+                'client_flat_status_id' => $request->client_flat_status_id
             ]);
 
-            $clientModel = Client::create([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'user_id' => $user->id,
-            ]);
-
-            return (new ClientResource($clientModel))->additional($this->metaData(request()));
+            return (new ClientFlatResource($clientFlatModel))->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
             return response()->json([
@@ -70,15 +61,15 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $client
-     * @return ClientResource|JsonResponse
+     * @param  int  $flat
+     * @return ClientFlatResource|JsonResponse
      */
-    public function show($client)
+    public function show($flat)
     {
         try {
-            $clientModel = Client::where('id', '=', $client)->first();
-            if ($clientModel) {
-                return (new ClientResource($clientModel))->additional($this->metaData(request()));
+            $clientFlatModel = ClientFlat::where('id', '=', $flat)->first();
+            if ($clientFlatModel) {
+                return (new ClientFlatResource($clientFlatModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
@@ -95,11 +86,11 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ClientRequest  $request
-     * @param  int  $client
-     * @return ClientResource|JsonResponse
+     * @param  ClientFlatRequest  $request
+     * @param  int  $flat
+     * @return ClientFlatResource|JsonResponse
      */
-    public function update(ClientRequest $request, $client)
+    public function update(ClientFlatRequest $request, $flat)
     {
         try {
             $validated = $request->validated();
@@ -107,16 +98,14 @@ class ClientController extends Controller
                 return response()->json(['error' => $validated], 403);
             }
 
-            $clientModel = Client::where('id', '=', $client)->first();
-            if ($clientModel) {
-                $clientModel->update([
-                    'name' => $request->name,
-                    'phone' => $request->phone,
+            $clientFlatModel = ClientFlat::where('id', '=', $flat)->first();
+            if ($clientFlatModel) {
+                $clientFlatModel->update([
+                    'client_id' => $request->client_id,
+                    'flat_id' => $request->flat_id,
+                    'client_flat_status_id' => $request->client_flat_status_id
                 ]);
-                $clientModel->user->update([
-                    'email' => $request->email,
-                ]);
-                return (new ClientResource($clientModel))->additional($this->metaData(request()));
+                return (new ClientFlatResource($clientFlatModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
@@ -133,15 +122,15 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $client
+     * @param  int  $flat
      * @return JsonResponse
      */
-    public function destroy($client)
+    public function destroy($flat)
     {
         try {
-            $clientModel = Client::where('id', '=', $client)->first();
-            if ($clientModel) {
-                $clientModel->delete();
+            $clientFlatModel = ClientFlat::where('id', '=', $flat)->first();
+            if ($clientFlatModel) {
+                $clientFlatModel->delete();
                 return response()->json([], 400);
             } else {
                 return response()->json([
@@ -154,9 +143,5 @@ class ClientController extends Controller
                 'error' => $ex->getMessage()
             ]);
         }
-    }
-
-    public function getMyFlats(){
-        return ClientManager::getFlats(Client::where('client.user_id', '=', Auth::id())->first());
     }
 }
