@@ -7,7 +7,7 @@ Route::group(
         'prefix' => '/chat'
     ],
     function(){
-        Route::post('/send', [App\Http\Controllers\ChatsController::class, 'send']);
+        Route::post('/send', [App\Http\Controllers\ChatController::class, 'send']);
     }
 );
 
