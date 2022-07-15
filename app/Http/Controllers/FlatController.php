@@ -116,6 +116,7 @@ class FlatController extends Controller
                     'balconyless_space' => $request->balconyless_space,
                     'residential_complex_id' => $request->residential_complex_id,
                     'cost' => $request->cost,
+                    'is_ready' => $request->is_ready,
                 ]);
                 return (new FlatResource($flatModel))->additional($this->metaData(request()));
             } else {
