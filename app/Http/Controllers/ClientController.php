@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\ClientManager;
 use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
@@ -153,5 +154,9 @@ class ClientController extends Controller
                 'error' => $ex->getMessage()
             ]);
         }
+    }
+
+    public function getMyFlats(){
+        return ClientManager::getFlats(Client::where('client.user_id', '=', Auth::id())->first());
     }
 }
