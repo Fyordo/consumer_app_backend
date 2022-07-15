@@ -38,10 +38,16 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  MessageRequest  $request
-     * @return NotImplementedException
+     * @return NotImplementedException|JsonResponse
      */
     public function store(MessageRequest $request)
     {
+        $validated = $request->validated();
+        if (!$validated) {
+            return response()->json(['error' => $validated], 403);
+        }
+
+
         return new NotImplementedException();
     }
 
@@ -82,6 +88,11 @@ class MessageController extends Controller
     public function update(MessageRequest $request, $message)
     {
         try {
+            $validated = $request->validated();
+            if (!$validated) {
+                return response()->json(['error' => $validated], 403);
+            }
+
             $messageModel = Message::with('user')
                 ->where('user_id', '=', Auth::id())
                 ->where('id', '=', $message)->first();
@@ -115,7 +126,7 @@ class MessageController extends Controller
                 ->where('id', '=', $message)->first();
             if ($messageModel) {
                 $messageModel->delete();
-                return response()->json([], 402);
+                return response()->json([], 400);
             } else {
                 return response()->json([
                     'error' => 'Permission denied'
