@@ -12,9 +12,9 @@ class FlatManagerService
 {
     public function getGraph(Flat $flat) : array{
         $result = [
-            '-1' => $flat->cost / 1.04, // Цены с 2021 года повысились на 4%
-            '0' => $flat->cost,
-            '1' => $flat->cost * 1.15, // Эксперты предсказывают рост на 15%
+            '2021' => $flat->cost / 1.04, // Цены с 2021 года повысились на 4%
+            '2022' => $flat->cost,
+            '2023' => $flat->cost * 1.15, // Эксперты предсказывают рост на 15%
         ];
 
         $xValues = [-1, 0, 1];
@@ -36,7 +36,7 @@ class FlatManagerService
                 $lagrangePol += $basicPol * $yValues[$i];
             }
 
-            $result[$x] = $lagrangePol;
+            $result[2022 + $x] = $lagrangePol;
             $xValues[] = $x;
             $yValues[] = $lagrangePol;
         }
