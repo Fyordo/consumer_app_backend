@@ -18,4 +18,5 @@ Route::middleware([\App\Http\Middleware\AuthUser::class])->group(function () {
     include "api/message.php";
     include "api/client.php";
     include "api/flat.php";
+    include "api/residential_complex.php";
 });

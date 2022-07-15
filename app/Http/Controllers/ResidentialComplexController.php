@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FlatRequest;
-use App\Http\Resources\FlatResource;
-use App\Models\Flat;
+use App\Http\Requests\ResidentialComplexRequest;
+use App\Http\Resources\ResidentialComplexResource;
+use App\Models\ResidentialComplex;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class FlatController extends Controller
+class ResidentialComplexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class FlatController extends Controller
     {
         $filter = request()->all();
         try {
-            return FlatResource::collection(Flat::filter($filter)->order($filter)->get())
+            return ResidentialComplexResource::collection(ResidentialComplex::filter($filter)->order($filter)->get())
                 ->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
@@ -32,10 +32,10 @@ class FlatController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  FlatRequest  $request
-     * @return FlatResource|JsonResponse
+     * @param  ResidentialComplexRequest  $request
+     * @return ResidentialComplexResource|JsonResponse
      */
-    public function store(FlatRequest $request)
+    public function store(ResidentialComplexRequest $request)
     {
         try {
             $validated = $request->validated();
@@ -43,18 +43,12 @@ class FlatController extends Controller
                 return response()->json(['error' => $validated], 403);
             }
 
-            $flatModel = Flat::create([
+            $complexModel = ResidentialComplex::create([
                 'title' => $request->title,
-                'status_id' => $request->status_id,
-                'full_space' => $request->full_space,
-                'floor_count' => $request->floor_count,
-                'living_space' => $request->living_space,
-                'room_count' => $request->room_count,
-                'balconyless_space' => $request->balconyless_space,
-                'residential_complex_id' => $request->residential_complex_id,
+                'address' => $request->address
             ]);
 
-            return (new FlatResource($flatModel))->additional($this->metaData(request()));
+            return (new ResidentialComplexResource($complexModel))->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
             return response()->json([
@@ -66,15 +60,15 @@ class FlatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $flat
-     * @return FlatResource|JsonResponse
+     * @param  int  $complex
+     * @return ResidentialComplexResource|JsonResponse
      */
-    public function show($flat)
+    public function show($complex)
     {
         try {
-            $flatModel = Flat::where('id', '=', $flat)->first();
-            if ($flatModel) {
-                return (new FlatResource($flatModel))->additional($this->metaData(request()));
+            $complexModel = ResidentialComplex::where('id', '=', $complex)->first();
+            if ($complexModel) {
+                return (new ResidentialComplexResource($complexModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
@@ -91,11 +85,11 @@ class FlatController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  FlatRequest  $request
-     * @param  int  $flat
-     * @return FlatResource|JsonResponse
+     * @param  ResidentialComplexRequest  $request
+     * @param  int  $complex
+     * @return ResidentialComplexResource|JsonResponse
      */
-    public function update(FlatRequest $request, $flat)
+    public function update(ResidentialComplexRequest $request, $complex)
     {
         try {
             $validated = $request->validated();
@@ -103,19 +97,13 @@ class FlatController extends Controller
                 return response()->json(['error' => $validated], 403);
             }
 
-            $flatModel = Flat::where('id', '=', $flat)->first();
-            if ($flatModel) {
-                $flatModel->update([
+            $complexModel = ResidentialComplex::where('id', '=', $complex)->first();
+            if ($complexModel) {
+                $complexModel->update([
                     'title' => $request->title,
-                    'status_id' => $request->status_id,
-                    'full_space' => $request->full_space,
-                    'floor_count' => $request->floor_count,
-                    'living_space' => $request->living_space,
-                    'room_count' => $request->room_count,
-                    'balconyless_space' => $request->balconyless_space,
-                    'residential_complex_id' => $request->residential_complex_id,
+                    'address' => $request->address
                 ]);
-                return (new FlatResource($flatModel))->additional($this->metaData(request()));
+                return (new ResidentialComplexResource($complexModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([
                     'error' => 'Object doesn\'t exist'
@@ -132,15 +120,15 @@ class FlatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $flat
+     * @param  int  $complex
      * @return JsonResponse
      */
-    public function destroy($flat)
+    public function destroy($complex)
     {
         try {
-            $flatModel = Flat::where('id', '=', $flat)->first();
-            if ($flatModel) {
-                $flatModel->delete();
+            $complexModel = ResidentialComplex::where('id', '=', $complex)->first();
+            if ($complexModel) {
+                $complexModel->delete();
                 return response()->json([], 400);
             } else {
                 return response()->json([
