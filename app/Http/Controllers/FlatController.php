@@ -19,7 +19,7 @@ class FlatController extends Controller
     {
         $filter = request()->all();
         try {
-            return FlatResource::collection(Flat::where($filter)->get())
+            return FlatResource::collection(Flat::filter($filter)->order($filter)->get())
                 ->additional($this->metaData(request()));
         }
         catch (\Exception $ex){
