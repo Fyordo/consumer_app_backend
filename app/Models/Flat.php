@@ -34,7 +34,8 @@ class Flat extends BaseModel
     protected $appends = [
         'status',
         'features',
-        'square_cost'
+        'square_cost',
+        'address'
     ];
 
     public function status(){
@@ -61,6 +62,10 @@ class Flat extends BaseModel
 
     public function getFeaturesAttribute(){
         return $this->features()->get();
+    }
+
+    public function getAddressAttribute(){
+        return ResidentialComplex::where('id', '=', $this->residential_complex_id)->first()->address;
     }
 
     // Custom filter
