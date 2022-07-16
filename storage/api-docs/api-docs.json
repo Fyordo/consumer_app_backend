@@ -999,7 +999,7 @@
         "/api/complex": {
             "get": {
                 "tags": [
-                    "Client"
+                    "ResidentialComplex"
                 ],
                 "description": "Получение списка ЖК",
                 "responses": {
