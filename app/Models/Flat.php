@@ -24,6 +24,10 @@ class Flat extends BaseModel
         'residential_complex_id',
         'cost',
         'is_ready',
+        'view',
+        'repair',
+        'material',
+        'height',
     ];
 
     protected $appends = [

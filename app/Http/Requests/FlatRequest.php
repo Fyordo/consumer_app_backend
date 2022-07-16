@@ -95,6 +95,10 @@ class FlatRequest extends FormRequest
             'residential_complex_id' => 'integer|required',
             'cost' => 'integer',
             'is_ready' => 'boolean',
+            'repair' => 'string',
+            'view' => 'string',
+            'material' => 'string',
+            'height' => 'float',
         ];
     }
 }

@@ -100,6 +100,10 @@ class FlatResource extends JsonResource
             'cost' => $this->cost,
             'square_cost' => $this->square_cost,
             'is_ready' => (bool)$this->is_ready,
+            'repair' => $this->repair,
+            'view' => $this->view,
+            'material' => $this->material,
+            'height' => $this->height,
             'features' => $this->when($this->features, FeatureResource::collection($this->features)),
         ];
     }
