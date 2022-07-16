@@ -397,7 +397,11 @@ class ClientController extends Controller
         return ClientManager::getFlats(Auth::user()->client);
     }
 
-    public function getRecommendations(){
-        return ClientManager::getRecommendations(Auth::user()->client);
+    public function getRequestRecommendations(){
+        return ClientManager::getRequestRecommendations(Auth::user()->client);
+    }
+
+    public function getFlatRecommendation(){
+        return ClientManager::getFlatRecommendation(Auth::user()->client);
     }
 }

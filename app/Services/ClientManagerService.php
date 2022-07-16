@@ -19,7 +19,7 @@ class ClientManagerService
         return $client_flats;
     }
 
-    public function getRecommendations(Client $client){
+    public function getRequestRecommendations(Client $client){
         $recommendations = RecommendationResource::collection($client->recommendations()->get());
 
         $filter = [];
@@ -40,5 +40,9 @@ class ClientManagerService
         }
 
         return FlatResource::collection(Flat::filter($filter)->get());
+    }
+
+    public function getFlatRecommendation(Client $client){
+        
     }
 }

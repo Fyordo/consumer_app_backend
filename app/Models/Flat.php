@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\FlatResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,7 +27,8 @@ class Flat extends BaseModel
     ];
 
     protected $appends = [
-        'status'
+        'status',
+        'features'
     ];
 
     public function status(){
@@ -35,6 +37,20 @@ class Flat extends BaseModel
 
     public function getStatusAttribute(){
         return $this->status()->first();
+    }
+
+    public function features(){
+        return $this->hasManyThrough(
+            Feature::class, FeatureFlat::class,
+            'flat_id',
+            'id',
+            'id',
+            'feature_id'
+        );
+    }
+
+    public function getFeaturesAttribute(){
+        return $this->features()->get();
     }
 
     // Custom filter
