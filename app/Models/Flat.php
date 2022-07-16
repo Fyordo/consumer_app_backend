@@ -36,4 +36,27 @@ class Flat extends BaseModel
     public function getStatusAttribute(){
         return $this->status()->first();
     }
+
+    // Custom filter
+
+    public function scopeFilter(Builder $query, array $filter = []){
+        /**
+         * @var $key string
+         */
+        foreach ($filter as $key => $value) {
+            if ($key == "sort_name" || $key == "sort_order"){
+                continue;
+            }
+            if (str_ends_with($key, "_from")){
+                $field = substr($key, 0, strlen($key) - 5);
+                $query
+                    ->where($field, '>=', $value);
+            }
+            else if (str_ends_with($key, "_to")){
+                $field = substr($key, 0, strlen($key) - 3);
+                $query
+                    ->where($field, '<=', $value);
+            }
+        }
+    }
 }
