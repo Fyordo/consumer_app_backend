@@ -1,0 +1,1534 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ConsumerApp API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/client": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение списка клиентов",
+                "responses": {
+                    "200": {
+                        "description": "Список клиентов найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив найденных клиентов",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Client"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Добавить клиента",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClientRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Клиент добавлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Client"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/{client}": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение клиента",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Идентификатор клиента",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Клиент найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Client"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Отредактировать клиента",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Идентификатор клиента",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClientRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Клиент отредактирован",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Client"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Удалить клиента",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Идентификатор клиента",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Клиент удалён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "null"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/flats": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение списка квартир клиента",
+                "responses": {
+                    "200": {
+                        "description": "Список квартир клиента найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив найденных квартир клиента",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Flat"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/recommendations": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение рекомендованных квартир клиента",
+                "responses": {
+                    "200": {
+                        "description": "Список рекомендованных квартир клиента найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив рекомендованных квартир клиента",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Flat"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/flat": {
+            "get": {
+                "tags": [
+                    "ClientFlat"
+                ],
+                "description": "Получение списка связок клиент-квартира",
+                "responses": {
+                    "200": {
+                        "description": "Список связок клиент-квартира найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив найденных связок клиент-квартира",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/ClientFlat"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ClientFlat"
+                ],
+                "description": "Добавить связку клиент-квартира",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClientFlatRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Связка клиент-квартира добавлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/ClientFlat"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/flat/{flat}": {
+            "get": {
+                "tags": [
+                    "ClientFlat"
+                ],
+                "description": "Получение связки клиент-квартира",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор связки клиент-квартира",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Связка клиент-квартира найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/ClientFlat"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ClientFlat"
+                ],
+                "description": "Отредактировать связку клиент-квартира",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор связки клиент-квартира",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClientFlatRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Связка клиент-квартира отредактирована",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Client"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ClientFlat"
+                ],
+                "description": "Удалить связку клиент-квартира",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор связки клиент-квартира",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Связка клиент-квартира удалён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "null"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/flat": {
+            "get": {
+                "tags": [
+                    "Flat"
+                ],
+                "description": "Получение списка квартир",
+                "responses": {
+                    "200": {
+                        "description": "Список квартир найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив найденных квартир",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Flat"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Flat"
+                ],
+                "description": "Добавить квартиру",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FlatRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Квартира добавлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Flat"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/flat/{flat}": {
+            "get": {
+                "tags": [
+                    "Flat"
+                ],
+                "description": "Получение квартиры",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор квартиры",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Квартира найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Flat"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Flat"
+                ],
+                "description": "Отредактировать квартиру",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор квартиры",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FlatRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Квартира отредактирована",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Flat"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Flat"
+                ],
+                "description": "Удалить квартиру",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор квартиры",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Квартира удалёна",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "null"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/flat/graph/{flat}": {
+            "get": {
+                "tags": [
+                    "Flat"
+                ],
+                "description": "Получение графика роста цены квартиры",
+                "parameters": [
+                    {
+                        "name": "flat",
+                        "in": "path",
+                        "description": "Идентификатор квартиры, график которой будет построен",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "График построен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "График",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "object"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/message": {
+            "get": {
+                "tags": [
+                    "Message"
+                ],
+                "description": "Получение списка сообщений",
+                "responses": {
+                    "200": {
+                        "description": "Список сообщений найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив найденных сообщений",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Message"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Message"
+                ],
+                "description": "Добавить сообщение",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MessageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Сообщение добавлено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Message"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/message/{message}": {
+            "get": {
+                "tags": [
+                    "Message"
+                ],
+                "description": "Получение сообщение",
+                "parameters": [
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "description": "Идентификатор сообщения",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Сообщение найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Message"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Message"
+                ],
+                "description": "Отредактировать сообщение",
+                "parameters": [
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "description": "Идентификатор сообщения",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MessageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Сообщение отредактировано",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Message"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Message"
+                ],
+                "description": "Получение списка сообщений",
+                "parameters": [
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "description": "Идентификатор сообщения",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Сообщение удалено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "null"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/message/send": {
+            "delete": {
+                "tags": [
+                    "Message"
+                ],
+                "description": "Отправить сообщение",
+                "responses": {
+                    "200": {
+                        "description": "Сообщение отправлено"
+                    }
+                }
+            }
+        },
+        "/api/complex": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение списка ЖК",
+                "responses": {
+                    "200": {
+                        "description": "Список ЖК найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Массив найденных ЖК",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/ResidentialComplex"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ResidentialComplex"
+                ],
+                "description": "Добавить ЖК",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResidentialComplexRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ЖК добавлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/ResidentialComplex"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/complex/{complex}": {
+            "get": {
+                "tags": [
+                    "ResidentialComplex"
+                ],
+                "description": "Получение ЖК",
+                "parameters": [
+                    {
+                        "name": "complex",
+                        "in": "path",
+                        "description": "Идентификатор ЖК",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ЖК найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/ResidentialComplex"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "ResidentialComplex"
+                ],
+                "description": "Отредактировать ЖК",
+                "parameters": [
+                    {
+                        "name": "complex",
+                        "in": "path",
+                        "description": "Идентификатор ЖК",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResidentialComplexRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ЖК отредактирован",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/ResidentialComplex"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ResidentialComplex"
+                ],
+                "description": "Получение списка ЖК",
+                "parameters": [
+                    {
+                        "name": "complex",
+                        "in": "path",
+                        "description": "Идентификатор ЖК",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ЖК удалён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "null"
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ClientFlatRequest": {
+                "properties": {
+                    "client_id": {
+                        "description": "Идентификатор клиента",
+                        "type": "integer"
+                    },
+                    "flat_id": {
+                        "description": "Идентификатор квартиры",
+                        "type": "integer"
+                    },
+                    "client_flat_status_id": {
+                        "description": "Идентификатор статуса связки клиент-квартира",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ClientRequest": {
+                "properties": {
+                    "name": {
+                        "description": "ФИО клиента",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Почта клиента",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Телефон клиента",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "FlatRequest": {
+                "properties": {
+                    "title": {
+                        "description": "Название квартиры",
+                        "type": "string"
+                    },
+                    "status_id": {
+                        "description": "Идентификатор статуса квартиры",
+                        "type": "integer"
+                    },
+                    "full_space": {
+                        "description": "Вся площадь",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "floor_count": {
+                        "description": "Кол-во этажей",
+                        "type": "integer"
+                    },
+                    "living_space": {
+                        "description": "Жилая площадь",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "room_count": {
+                        "description": "Кол-во комнат",
+                        "type": "integer"
+                    },
+                    "balconyless_space": {
+                        "description": "Площадьь без балконов и т.п.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "residential_complex_id": {
+                        "description": "Идентификатор ЖК, в котором располагается квартира",
+                        "type": "integer"
+                    },
+                    "cost": {
+                        "description": "Начальная цена квартиры",
+                        "type": "integer"
+                    },
+                    "is_ready": {
+                        "description": "Готова ли квартира",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "MessageRequest": {
+                "properties": {
+                    "user_id": {
+                        "description": "Идентификатор пользователя",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "Сообщение",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ResidentialComplexRequest": {
+                "properties": {
+                    "title": {
+                        "description": "Название ЖК",
+                        "type": "string"
+                    },
+                    "address": {
+                        "description": "Адрес ЖК",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SendMessageRequest": {
+                "properties": {
+                    "message": {
+                        "description": "Сообщение",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ClientFlat": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор связки клиент-квартира",
+                        "type": "integer"
+                    },
+                    "client": {
+                        "$ref": "#/components/schemas/Client"
+                    },
+                    "flat": {
+                        "$ref": "#/components/schemas/Flat"
+                    },
+                    "client_flat_status": {
+                        "$ref": "#/components/schemas/ClientFlatStatus"
+                    }
+                },
+                "type": "object"
+            },
+            "ClientFlatStatus": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор статуса связки клиент-квартира",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название статуса связки клиент-квартира",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Client": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор клиента",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "ФИО клиента",
+                        "type": "string"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "email": {
+                        "description": "Почта клиента",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Телефон клиента",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Flat": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор квартиры",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название квартиры",
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/FlatStatus"
+                    },
+                    "full_space": {
+                        "description": "Вся площадь",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "floor_count": {
+                        "description": "Кол-во этажей",
+                        "type": "integer"
+                    },
+                    "living_space": {
+                        "description": "Жилая площадь",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "room_count": {
+                        "description": "Кол-во комнат",
+                        "type": "integer"
+                    },
+                    "balconyless_space": {
+                        "description": "Площадьь без балконов и т.п.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "residential_complex_id": {
+                        "description": "Идентификатор ЖК, в котором располагается квартира",
+                        "type": "integer"
+                    },
+                    "cost": {
+                        "description": "Начальная цена квартиры",
+                        "type": "integer"
+                    },
+                    "is_ready": {
+                        "description": "Готова ли квартира",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "FlatStatus": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор статуса квартиры",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название статуса квартиры",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Message": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор сообщения",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "ФИО клиента",
+                        "type": "string"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "send_time": {
+                        "description": "Время отправки",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Recommendation": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор рекомендации",
+                        "type": "integer"
+                    },
+                    "client": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "request_body": {
+                        "description": "Тело запроса пользователя",
+                        "type": "string",
+                        "format": "json"
+                    }
+                },
+                "type": "object"
+            },
+            "ResidentialComplex": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор ЖК",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название ЖК",
+                        "type": "string"
+                    },
+                    "address": {
+                        "description": "Адрес ЖК",
+                        "type": "string"
+                    },
+                    "flats": {
+                        "description": "Квартиры ЖК",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Flat"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор пользователя",
+                        "type": "integer"
+                    },
+                    "email": {
+                        "description": "Почта пользователя",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Когда пользователь был зарегистрирован",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

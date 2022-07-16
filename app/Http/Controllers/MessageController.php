@@ -14,6 +14,221 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Nette\NotImplementedException;
 
+/**
+ * @OA\Get(
+ *     path="/api/message",
+ *     description="Получение списка сообщений",
+ *     tags={"Message"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Список сообщений найден",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Массив найденных сообщений",
+ *                          @OA\Items(ref="#/components/schemas/Message")
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Get(
+ *     path="/api/message/{message}",
+ *     description="Получение сообщение",
+ *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="message",
+ *          description="Идентификатор сообщения",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="Сообщение найдено",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Сообщение",
+ *                          ref="#/components/schemas/Message"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Post(
+ *     path="/api/message",
+ *     description="Добавить сообщение",
+ *     tags={"Message"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                  ref="#/components/schemas/MessageRequest"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="Сообщение добавлено",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Добавленное сообщение",
+ *                          ref="#/components/schemas/Message"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Put(
+ *     path="/api/message/{message}",
+ *     description="Отредактировать сообщение",
+ *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="message",
+ *          description="Идентификатор сообщения",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                  ref="#/components/schemas/MessageRequest"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="Сообщение отредактировано",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Отредактированное сообщение",
+ *                          ref="#/components/schemas/Message"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Delete(
+ *     path="/api/message/{message}",
+ *     description="Получение списка сообщений",
+ *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="message",
+ *          description="Идентификатор сообщения",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="Сообщение удалено",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="null",
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Delete(
+ *     path="/api/message/send",
+ *     description="Отправить сообщение",
+ *     tags={"Message"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Сообщение отправлено",
+ *          @OA\Response(
+ *          response="200",
+ *          description="Сообщение отредактировано",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Отправленное сообщение",
+ *                          ref="#/components/schemas/Message"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ *   )
+ * )
+ */
+
 class MessageController extends Controller
 {
     /**

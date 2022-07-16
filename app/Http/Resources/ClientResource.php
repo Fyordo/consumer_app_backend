@@ -4,6 +4,43 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Client
+ *
+ * @OA\Schema(
+ *      schema="Client",
+ *      type="object",
+ *      @OA\Property(
+ *          property="id",
+ *          description="Идентификатор клиента",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="name",
+ *          description="ФИО клиента",
+ *          type="string"
+ *      ),
+ *      @OA\Property(
+ *          property="user",
+ *          description="Пользователь",
+ *          type="object",
+ *          ref="#/components/schemas/User"
+ *      ),
+ *      @OA\Property(
+ *          property="email",
+ *          description="Почта клиента",
+ *          type="string"
+ *      ),
+ *      @OA\Property(
+ *          property="phone",
+ *          description="Телефон клиента",
+ *          type="string"
+ *      )
+ *  )
+ *
+ * @package App\Models\Client
+ */
+
 class ClientResource extends JsonResource
 {
     /**
