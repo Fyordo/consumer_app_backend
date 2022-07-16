@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
  * @OA\Get(
  *     path="/api/complex",
  *     description="Получение списка ЖК",
- *     tags={"Client"},
+ *     tags={"ResidentialComplex"},
  *     @OA\Response(
  *          response="200",
  *          description="Список ЖК найден",
