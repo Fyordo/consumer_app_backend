@@ -3,6 +3,7 @@
 namespace App\Facades;
 
 use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \App\Services\ClientManagerService
  * @method static getFlats(Client $client)
- * @method static getRecommendations(Client $client)
+ * @method static getRequestRecommendations(Client $client)
+ * @method static getFlatRecommendation(Client $client, Request $request)
  */
 
 class ClientManager extends Facade

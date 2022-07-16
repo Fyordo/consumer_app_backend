@@ -293,6 +293,43 @@
                 }
             }
         },
+        "/api/client/flat/recommendation": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение рекомендованной квартиры для клиента",
+                "responses": {
+                    "200": {
+                        "description": "Рекомендованная квартира клиента найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Рекомендованная квартира клиента",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Flat"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/client/flat": {
             "get": {
                 "tags": [
@@ -1385,6 +1422,23 @@
                 },
                 "type": "object"
             },
+            "Feature": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор клиента",
+                        "type": "integer"
+                    },
+                    "count_request": {
+                        "description": "Кол-во запросов",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "Flat": {
                 "properties": {
                     "id": {
@@ -1432,6 +1486,13 @@
                     "is_ready": {
                         "description": "Готова ли квартира",
                         "type": "boolean"
+                    },
+                    "features": {
+                        "description": "Готова ли квартира",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Feature"
+                        }
                     }
                 },
                 "type": "object"
