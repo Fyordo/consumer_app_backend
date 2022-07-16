@@ -4,6 +4,38 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * ResidentialComplex
+ *
+ * @OA\Schema(
+ *      schema="ResidentialComplex",
+ *      type="object",
+ *      @OA\Property(
+ *          property="id",
+ *          description="Идентификатор ЖК",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="title",
+ *          description="Название ЖК",
+ *          type="string"
+ *      ),
+ *      @OA\Property(
+ *          property="address",
+ *          description="Адрес ЖК",
+ *          type="string"
+ *      ),
+ *      @OA\Property(
+ *          property="flats",
+ *          description="Квартиры ЖК",
+ *          type="array",
+ *          @OA\Items(ref="#/components/schemas/Flat")
+ *      )
+ *  )
+ *
+ * @package App\Models\ResidentialComplex
+ */
+
 class ResidentialComplexResource extends JsonResource
 {
     /**

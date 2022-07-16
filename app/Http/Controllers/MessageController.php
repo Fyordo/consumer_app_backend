@@ -14,6 +14,16 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Nette\NotImplementedException;
 
+/**
+ * @OA\Get(
+ *     path="/message",
+ *     @OA\Response(
+ *          response="200",
+ *          description="Список сообщений"
+ *     )
+ * )
+ */
+
 class MessageController extends Controller
 {
     /**

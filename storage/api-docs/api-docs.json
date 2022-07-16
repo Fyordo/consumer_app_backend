@@ -1,0 +1,221 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ConsumerApp API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/message": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Список сообщений"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ClientFlat": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор связки клиент-квартира",
+                        "type": "integer"
+                    },
+                    "client": {
+                        "$ref": "#/components/schemas/Client"
+                    },
+                    "flat": {
+                        "$ref": "#/components/schemas/Flat"
+                    },
+                    "client_flat_status": {
+                        "$ref": "#/components/schemas/ClientFlatStatus"
+                    }
+                },
+                "type": "object"
+            },
+            "ClientFlatStatus": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор статуса связки клиент-квартира",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название статуса связки клиент-квартира",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Client": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор клиента",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "ФИО клиента",
+                        "type": "string"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "email": {
+                        "description": "Почта клиента",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Телефон клиента",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Flat": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор квартиры",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название квартиры",
+                        "type": "string"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/FlatStatus"
+                    },
+                    "full_space": {
+                        "description": "Вся площадь",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "floor_count": {
+                        "description": "Кол-во этажей",
+                        "type": "integer"
+                    },
+                    "living_space": {
+                        "description": "Жилая площадь",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "room_count": {
+                        "description": "Кол-во комнат",
+                        "type": "integer"
+                    },
+                    "balconyless_space": {
+                        "description": "Площадьь без балконов и т.п.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "residential_complex_id": {
+                        "description": "Идентификатор ЖК, в котором располагается квартира",
+                        "type": "integer"
+                    },
+                    "cost": {
+                        "description": "Начальная цена квартиры",
+                        "type": "integer"
+                    },
+                    "is_ready": {
+                        "description": "Готова ли квартира",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "FlatStatus": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор статуса квартиры",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название статуса квартиры",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Message": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор сообщения",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "ФИО клиента",
+                        "type": "string"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "send_time": {
+                        "description": "Время отправки",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Recommendation": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор рекомендации",
+                        "type": "integer"
+                    },
+                    "client": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "request_body": {
+                        "description": "Тело запроса пользователя",
+                        "type": "string",
+                        "format": "json"
+                    }
+                },
+                "type": "object"
+            },
+            "ResidentialComplex": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор ЖК",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Название ЖК",
+                        "type": "string"
+                    },
+                    "address": {
+                        "description": "Адрес ЖК",
+                        "type": "string"
+                    },
+                    "flats": {
+                        "description": "Квартиры ЖК",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Flat"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "description": "Идентификатор пользователя",
+                        "type": "integer"
+                    },
+                    "email": {
+                        "description": "Почта пользователя",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Когда пользователь был зарегистрирован",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

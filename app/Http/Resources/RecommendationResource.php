@@ -4,6 +4,34 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Recommendation
+ *
+ * @OA\Schema(
+ *      schema="Recommendation",
+ *      type="object",
+ *      @OA\Property(
+ *          property="id",
+ *          description="Идентификатор рекомендации",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="client",
+ *          description="Клиент",
+ *          type="object",
+ *          ref="#/components/schemas/User"
+ *      ),
+ *      @OA\Property(
+ *          property="request_body",
+ *          description="Тело запроса пользователя",
+ *          type="string",
+ *          format="json"
+ *      )
+ *  )
+ *
+ * @package App\Models\Recommendation
+ */
+
 class RecommendationResource extends JsonResource
 {
     /**

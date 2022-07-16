@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\URL;
 
+/**
+ * @OA\Info(
+ *     title="ConsumerApp API",
+ *     version="1.0"
+ * )
+ */
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
