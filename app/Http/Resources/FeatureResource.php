@@ -4,6 +4,32 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Feature
+ *
+ * @OA\Schema(
+ *      schema="Feature",
+ *      type="object",
+ *      @OA\Property(
+ *          property="id",
+ *          description="Идентификатор клиента",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="count_request",
+ *          description="Кол-во запросов",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="title",
+ *          description="Название",
+ *          type="integer"
+ *      )
+ *  )
+ *
+ * @package App\Models\Feature
+ */
+
 class FeatureResource extends JsonResource
 {
     /**

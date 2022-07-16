@@ -13,7 +13,8 @@ class FeatureFlat extends Model
 
     protected $fillable = [
         'flat_id',
-        'feature_id'
+        'feature_id',
+        'value'
     ];
 
     protected $appends = [

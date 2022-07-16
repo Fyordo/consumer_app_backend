@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\ClientManager;
 use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientResource;
+use App\Http\Resources\FlatResource;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -247,6 +248,33 @@ use Nette\NotImplementedException;
  *         )
  *      )
  * )
+ * @OA\Get(
+ *     path="/api/client/flat/recommendation",
+ *     description="Получение рекомендованной квартиры для клиента",
+ *     tags={"Client"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Рекомендованная квартира клиента найдена",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Рекомендованная квартира клиента",
+ *                          @OA\Items(ref="#/components/schemas/Flat")
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
  */
 
 class ClientController extends Controller
@@ -394,14 +422,14 @@ class ClientController extends Controller
     }
 
     public function getMyFlats(){
-        return ClientManager::getFlats(Auth::user()->client);
+        return FlatResource::collection(ClientManager::getFlats(Auth::user()->client))->additional($this->metaData(request()));
     }
 
     public function getRequestRecommendations(){
-        return ClientManager::getRequestRecommendations(Auth::user()->client);
+        return FlatResource::collection(ClientManager::getRequestRecommendations(Auth::user()->client))->additional($this->metaData(request()));
     }
 
     public function getFlatRecommendation(){
-        return ClientManager::getFlatRecommendation(Auth::user()->client);
+        return (new FlatResource(ClientManager::getFlatRecommendation(Auth::user()->client, request())))->additional($this->metaData(request()));
     }
 }

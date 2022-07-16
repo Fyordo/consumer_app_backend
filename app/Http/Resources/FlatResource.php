@@ -65,6 +65,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *          property="is_ready",
  *          description="Готова ли квартира",
  *          type="boolean"
+ *      ),
+ *      @OA\Property(
+ *          property="features",
+ *          description="Готова ли квартира",
+ *          type="array",
+ *          @OA\Items(ref="#/components/schemas/Feature")
  *      )
  *  )
  *
@@ -84,7 +90,7 @@ class FlatResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'status' => $this->when($this->status, new FlatStatusResource($this->status)), // TODO
+            'status' => $this->when($this->status, new FlatStatusResource($this->status)),
             'full_space' => $this->full_space,
             'floor_count' => $this->floor_count,
             'living_space' => $this->living_space,

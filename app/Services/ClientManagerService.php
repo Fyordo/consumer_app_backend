@@ -7,7 +7,10 @@ use App\Http\Resources\FlatResource;
 use App\Http\Resources\RecommendationResource;
 use App\Models\Client;
 use App\Models\ClientFlat;
+use App\Models\Feature;
+use App\Models\FeatureFlat;
 use App\Models\Flat;
+use Illuminate\Http\Request;
 
 class ClientManagerService
 {
@@ -39,10 +42,30 @@ class ClientManagerService
             }
         }
 
-        return FlatResource::collection(Flat::filter($filter)->get());
+        return Flat::filter($filter)->get();
     }
 
-    public function getFlatRecommendation(Client $client){
-        
+    public function getFlatRecommendation(Client $client, Request $request){
+        $values = [];
+        $bestFeatureFlat = [];
+
+        foreach (Feature::all() as $feature){
+            $values[$feature->id] = $request->input($feature->id);
+            $bestFeatureFlat[$feature->id] = FeatureFlat::where('feature_id', '=', $feature->id)->orderBy('value', 'desc')->first();
+        }
+
+        $max_value = 0;
+        $bestFlat = null;
+
+        foreach ($bestFeatureFlat as $item) {
+            $new_value = $item->value * $values[$item->feature_id];
+
+            if ($new_value > $max_value){
+                $max_value = $new_value;
+                $bestFlat = $item->flat;
+            }
+        }
+
+        return $bestFlat;
     }
 }
