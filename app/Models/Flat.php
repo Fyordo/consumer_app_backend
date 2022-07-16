@@ -28,7 +28,8 @@ class Flat extends BaseModel
 
     protected $appends = [
         'status',
-        'features'
+        'features',
+        'square_cost'
     ];
 
     public function status(){
@@ -37,6 +38,10 @@ class Flat extends BaseModel
 
     public function getStatusAttribute(){
         return $this->status()->first();
+    }
+
+    public function getSquareCostAttribute(){
+        return $this->cost / $this->full_space;
     }
 
     public function features(){
