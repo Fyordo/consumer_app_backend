@@ -41,6 +41,15 @@ use Illuminate\Http\Request;
  *     path="/api/complex/{complex}",
  *     description="Получение ЖК",
  *     tags={"ResidentialComplex"},
+ *     @OA\Parameter(
+ *          name="complex",
+ *          description="Идентификатор ЖК",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="ЖК найден",
@@ -105,6 +114,15 @@ use Illuminate\Http\Request;
  *     path="/api/complex/{complex}",
  *     description="Отредактировать ЖК",
  *     tags={"ResidentialComplex"},
+ *     @OA\Parameter(
+ *          name="complex",
+ *          description="Идентификатор ЖК",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
@@ -141,6 +159,15 @@ use Illuminate\Http\Request;
  *     path="/api/complex/{complex}",
  *     description="Получение списка ЖК",
  *     tags={"ResidentialComplex"},
+ *     @OA\Parameter(
+ *          name="complex",
+ *          description="Идентификатор ЖК",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="ЖК удалён",

@@ -47,6 +47,15 @@ use Nette\NotImplementedException;
  *     path="/api/message/{message}",
  *     description="Получение сообщение",
  *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="message",
+ *          description="Идентификатор сообщения",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Сообщение найдено",
@@ -111,6 +120,15 @@ use Nette\NotImplementedException;
  *     path="/api/message/{message}",
  *     description="Отредактировать сообщение",
  *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="message",
+ *          description="Идентификатор сообщения",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
@@ -147,6 +165,15 @@ use Nette\NotImplementedException;
  *     path="/api/message/{message}",
  *     description="Получение списка сообщений",
  *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="message",
+ *          description="Идентификатор сообщения",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Сообщение удалено",
@@ -167,6 +194,38 @@ use Nette\NotImplementedException;
  *             }
  *         )
  *      )
+ * )
+ *
+ * @OA\Delete(
+ *     path="/api/message/send",
+ *     description="Отправить сообщение",
+ *     tags={"Message"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Сообщение отправлено",
+ *          @OA\Response(
+ *          response="200",
+ *          description="Сообщение отредактировано",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Отправленное сообщение",
+ *                          ref="#/components/schemas/Message"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ *   )
  * )
  */
 

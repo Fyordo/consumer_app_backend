@@ -44,6 +44,15 @@ use Illuminate\Support\Facades\Auth;
  *     path="/api/flat/{flat}",
  *     description="Получение квартиры",
  *     tags={"Flat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор квартиры",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Квартира найдена",
@@ -108,6 +117,15 @@ use Illuminate\Support\Facades\Auth;
  *     path="/api/flat/{flat}",
  *     description="Отредактировать квартиру",
  *     tags={"Flat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор квартиры",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
@@ -144,6 +162,15 @@ use Illuminate\Support\Facades\Auth;
  *     path="/api/flat/{flat}",
  *     description="Удалить квартиру",
  *     tags={"Flat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор квартиры",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Квартира удалёна",
@@ -154,6 +181,42 @@ use Illuminate\Support\Facades\Auth;
  *                      @OA\Property(
  *                          property="data",
  *                          type="null",
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ * @OA\Get(
+ *     path="/api/flat/graph/{flat}",
+ *     description="Получение графика роста цены квартиры",
+ *     tags={"Flat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор квартиры, график которой будет построен",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="График построен",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="График",
+ *                          @OA\Items(ref="object")
  *                      ),
  *                      @OA\Property(
  *                          property="meta",

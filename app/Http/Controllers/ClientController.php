@@ -45,6 +45,15 @@ use Nette\NotImplementedException;
  *     path="/api/client/{client}",
  *     description="Получение клиента",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="client",
+ *          description="Идентификатор клиента",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Клиент найден",
@@ -109,6 +118,15 @@ use Nette\NotImplementedException;
  *     path="/api/client/{client}",
  *     description="Отредактировать клиента",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="client",
+ *          description="Идентификатор клиента",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
@@ -145,6 +163,15 @@ use Nette\NotImplementedException;
  *     path="/api/client/{client}",
  *     description="Удалить клиента",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="client",
+ *          description="Идентификатор клиента",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Клиент удалён",
@@ -155,6 +182,60 @@ use Nette\NotImplementedException;
  *                      @OA\Property(
  *                          property="data",
  *                          type="null",
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ * @OA\Get(
+ *     path="/api/client/flats",
+ *     description="Получение списка квартир клиента",
+ *     tags={"Client"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Список квартир клиента найден",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Массив найденных квартир клиента",
+ *                          @OA\Items(ref="#/components/schemas/Flat")
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ * @OA\Get(
+ *     path="/api/client/recommendations",
+ *     description="Получение рекомендованных квартир клиента",
+ *     tags={"Client"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Список рекомендованных квартир клиента найден",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Массив рекомендованных квартир клиента",
+ *                          @OA\Items(ref="#/components/schemas/Flat")
  *                      ),
  *                      @OA\Property(
  *                          property="meta",

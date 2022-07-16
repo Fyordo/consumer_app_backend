@@ -41,6 +41,15 @@ use Illuminate\Http\Request;
  *     path="/api/client/flat/{flat}",
  *     description="Получение связки клиент-квартира",
  *     tags={"ClientFlat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор связки клиент-квартира",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Связка клиент-квартира найдена",
@@ -105,6 +114,15 @@ use Illuminate\Http\Request;
  *     path="/api/client/flat/{flat}",
  *     description="Отредактировать связку клиент-квартира",
  *     tags={"ClientFlat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор связки клиент-квартира",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
@@ -139,8 +157,17 @@ use Illuminate\Http\Request;
  *
  * @OA\Delete(
  *     path="/api/client/flat/{flat}",
- *     description="Удалить связоку клиент-квартира",
+ *     description="Удалить связку клиент-квартира",
  *     tags={"ClientFlat"},
+ *     @OA\Parameter(
+ *          name="flat",
+ *          description="Идентификатор связки клиент-квартира",
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Связка клиент-квартира удалён",
