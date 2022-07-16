@@ -6,8 +6,10 @@ use App\Facades\FlatManager;
 use App\Http\Requests\FlatRequest;
 use App\Http\Resources\FlatResource;
 use App\Models\Flat;
+use App\Models\Recommendation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FlatController extends Controller
 {
@@ -20,6 +22,10 @@ class FlatController extends Controller
     {
         $filter = request()->all();
         try {
+            Recommendation::create([
+                'request_body' => json_encode($filter),
+                'client_id' => Auth::user()->client->id
+            ]);
             return FlatResource::collection(Flat::filter($filter)->order($filter)->get())
                 ->additional($this->metaData(request()));
         }
@@ -75,6 +81,9 @@ class FlatController extends Controller
         try {
             $flatModel = Flat::where('id', '=', $flat)->first();
             if ($flatModel) {
+                Recommendation::create([
+                    'request_body' => json_encode(['id' => $flat])
+                ]);
                 return (new FlatResource($flatModel))->additional($this->metaData(request()));
             } else {
                 return response()->json([

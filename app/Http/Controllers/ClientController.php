@@ -157,6 +157,10 @@ class ClientController extends Controller
     }
 
     public function getMyFlats(){
-        return ClientManager::getFlats(Client::where('client.user_id', '=', Auth::id())->first());
+        return ClientManager::getFlats(Auth::user()->client);
+    }
+
+    public function getRecommendations(){
+        return ClientManager::getRecommendations(Auth::user()->client);
     }
 }
