@@ -9,6 +9,7 @@ use App\Models\Flat;
 use App\Models\Recommendation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FlatController extends Controller
 {
@@ -22,7 +23,8 @@ class FlatController extends Controller
         $filter = request()->all();
         try {
             Recommendation::create([
-                'request_body' => json_encode($filter)
+                'request_body' => json_encode($filter),
+                'client_id' => Auth::user()->client->id
             ]);
             return FlatResource::collection(Flat::filter($filter)->order($filter)->get())
                 ->additional($this->metaData(request()));
