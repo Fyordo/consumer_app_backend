@@ -8,6 +8,162 @@ use App\Models\ResidentialComplex;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Get(
+ *     path="/api/complex",
+ *     description="Получение списка ЖК",
+ *     tags={"Client"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Список ЖК найден",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Массив найденных ЖК",
+ *                          @OA\Items(ref="#/components/schemas/ResidentialComplex")
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Get(
+ *     path="/api/complex/{complex}",
+ *     description="Получение ЖК",
+ *     tags={"ResidentialComplex"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="ЖК найден",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="ЖК",
+ *                          ref="#/components/schemas/ResidentialComplex"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Post(
+ *     path="/api/complex",
+ *     description="Добавить ЖК",
+ *     tags={"ResidentialComplex"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                  ref="#/components/schemas/ResidentialComplexRequest"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="ЖК добавлен",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Добавленный ЖК",
+ *                          ref="#/components/schemas/ResidentialComplex"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Put(
+ *     path="/api/complex/{complex}",
+ *     description="Отредактировать ЖК",
+ *     tags={"ResidentialComplex"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                  ref="#/components/schemas/ResidentialComplexRequest"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="ЖК отредактирован",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Отредактированный ЖК",
+ *                          ref="#/components/schemas/ResidentialComplex"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Delete(
+ *     path="/api/complex/{complex}",
+ *     description="Получение списка ЖК",
+ *     tags={"ResidentialComplex"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="ЖК удалён",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="null",
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ */
+
 class ResidentialComplexController extends Controller
 {
     /**

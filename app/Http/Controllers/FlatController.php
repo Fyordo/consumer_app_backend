@@ -11,6 +11,162 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @OA\Get(
+ *     path="/api/flat",
+ *     description="Получение списка квартир",
+ *     tags={"Flat"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Список квартир найден",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Массив найденных квартир",
+ *                          @OA\Items(ref="#/components/schemas/Flat")
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Get(
+ *     path="/api/flat/{flat}",
+ *     description="Получение квартиры",
+ *     tags={"Flat"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Квартира найдена",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Квартира",
+ *                          ref="#/components/schemas/Flat"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Post(
+ *     path="/api/flat",
+ *     description="Добавить квартиру",
+ *     tags={"Flat"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                  ref="#/components/schemas/FlatRequest"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="Квартира добавлена",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Добавленная квартира",
+ *                          ref="#/components/schemas/Flat"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Put(
+ *     path="/api/flat/{flat}",
+ *     description="Отредактировать квартиру",
+ *     tags={"Flat"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                  ref="#/components/schemas/FlatRequest"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *          response="200",
+ *          description="Квартира отредактирована",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="object",
+ *                          description="Отредактированная квартира",
+ *                          ref="#/components/schemas/Flat"
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ *
+ * @OA\Delete(
+ *     path="/api/flat/{flat}",
+ *     description="Удалить квартиру",
+ *     tags={"Flat"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Квартира удалёна",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="null",
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
+ */
+
 class FlatController extends Controller
 {
     /**

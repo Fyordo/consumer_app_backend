@@ -4,6 +4,22 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * SendMessageRequest
+ *
+ * @OA\Schema(
+ *      schema="SendMessageRequest",
+ *      type="object",
+ *      @OA\Property(
+ *          property="message",
+ *          description="Сообщение",
+ *          type="string"
+ *      )
+ *  )
+ *
+ * @package App\Requests\SendMessageRequest
+ */
+
 class SendMessageRequest extends FormRequest
 {
     /**

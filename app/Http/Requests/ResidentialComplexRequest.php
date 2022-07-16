@@ -4,6 +4,27 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * ResidentialComplexRequest
+ *
+ * @OA\Schema(
+ *      schema="ResidentialComplexRequest",
+ *      type="object",
+ *      @OA\Property(
+ *          property="title",
+ *          description="Название ЖК",
+ *          type="string"
+ *      ),
+ *      @OA\Property(
+ *          property="address",
+ *          description="Адрес ЖК",
+ *          type="string"
+ *      )
+ *  )
+ *
+ * @package App\Requests\ResidentialComplexRequest
+ */
+
 class ResidentialComplexRequest extends FormRequest
 {
     /**

@@ -4,6 +4,32 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * ClientFlatRequest
+ *
+ * @OA\Schema(
+ *      schema="ClientFlatRequest",
+ *      type="object",
+ *      @OA\Property(
+ *          property="client_id",
+ *          description="Идентификатор клиента",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="flat_id",
+ *          description="Идентификатор квартиры",
+ *          type="integer"
+ *      ),
+ *      @OA\Property(
+ *          property="client_flat_status_id",
+ *          description="Идентификатор статуса связки клиент-квартира",
+ *          type="integer"
+ *      )
+ *  )
+ *
+ * @package App\Requests\ClientFlatRequest
+ */
+
 class ClientFlatRequest extends FormRequest
 {
     /**
