@@ -15,11 +15,9 @@ use Illuminate\Http\Request;
 class ClientManagerService
 {
     public function getFlats(Client $client){
-        $client_flats = ClientFlatResource::collection(
-            ClientFlat::where('client_id', '=', $client->id
-            )->get()
-        );
-        return $client_flats;
+        $client_flats = array_column(ClientFlat::where('client_id', '=', $client->id)->select('flat_id')->get()->toArray(), 'flat_id');
+
+        return Flat::whereIn('id', $client_flats)->get();
     }
 
     public function getRequestRecommendations(Client $client){
