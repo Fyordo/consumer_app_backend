@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Flat;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -51,6 +52,7 @@ class ResidentialComplexResource extends JsonResource
             'title' => $this->title,
             'address' => $this->address,
             'flats' => $this->when($this->flats, FlatResource::collection($this->flats)),
+            'min_cost' => $this->when($this->flats, Flat::where('flats.residential_complex_id', '=', $this->id)->orderBy('cost', 'asc')->first()->cost)
         ];
     }
 }
