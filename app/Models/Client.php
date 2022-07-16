@@ -34,4 +34,8 @@ class Client extends BaseModel
     public function getEmailAttribute(){
         return $this->user->email;
     }
+
+    public function recommendations(){
+        return $this->hasMany(Recommendation::class, 'client_id', 'id');
+    }
 }

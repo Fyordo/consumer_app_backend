@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \App\Services\ClientManagerService
  * @method static getFlats(Client $client)
+ * @method static getRecommendations(Client $client)
  */
 
 class ClientManager extends Facade
