@@ -41,6 +41,12 @@ class FlatManagerService
             $yValues[] = $lagrangePol;
         }
 
+        foreach ($result as $key => $value) {
+            if ($key % 2 != 0){
+                $result[$key] *= 0.6;
+            }
+        }
+
         return $result;
     }
 }
