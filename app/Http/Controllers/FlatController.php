@@ -280,6 +280,9 @@ class FlatController extends Controller
                 'residential_complex_id' => $request->residential_complex_id,
                 'view' => $request->view,
                 'repair' => $request->repair,
+                'material' => $request->material,
+                'height' => $request->height,
+                'parking' => $request->parking,
             ]);
 
             return (new FlatResource($flatModel))->additional($this->metaData(request()));
@@ -351,6 +354,7 @@ class FlatController extends Controller
                     'repair' => $request->repair,
                     'height' => $request->height,
                     'material' => $request->material,
+                    'parking' => $request->parking,
                 ]);
                 return (new FlatResource($flatModel))->additional($this->metaData(request()));
             } else {

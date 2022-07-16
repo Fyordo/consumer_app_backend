@@ -104,6 +104,7 @@ class FlatResource extends JsonResource
             'view' => $this->view,
             'material' => $this->material,
             'height' => $this->height,
+            'parking' => $this->parking,
             'features' => $this->when($this->features, FeatureResource::collection($this->features)),
         ];
     }

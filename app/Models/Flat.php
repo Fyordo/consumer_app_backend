@@ -28,6 +28,7 @@ class Flat extends BaseModel
         'repair',
         'material',
         'height',
+        'parking',
     ];
 
     protected $appends = [
@@ -69,7 +70,18 @@ class Flat extends BaseModel
          * @var $key string
          */
         foreach ($filter as $key => $value) {
-            if ($key == "sort_name" || $key == "sort_order"){
+            if ($key == "sort_name" ||
+                $key == "sort_order"){
+                continue;
+            }
+            if ($key == "is_ready" ||
+                $key == "repair" ||
+                $key == "view" ||
+                $key == "room_count" ||
+                $key == "parking" ||
+                $key == "material"
+            ){
+                $query->whereIn($key, is_array($value) ? $value : [$value]);
                 continue;
             }
             if (str_ends_with($key, "_from")){
