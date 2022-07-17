@@ -457,7 +457,7 @@ class ClientController extends Controller
     }
 
     public function getFlatRecommendation(){
-        return (new FlatResource(ClientManager::getFlatRecommendation(Auth::user()->client, request())))->additional($this->metaData(request()));
+        return (new FlatResource(ClientManager::getFlatRecommendation(Auth::user()->client, request()->all())))->additional($this->metaData(request()));
     }
 
     public function getAIRecommendations(){

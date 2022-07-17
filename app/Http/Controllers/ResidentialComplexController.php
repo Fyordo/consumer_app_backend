@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\ClientManager;
+use App\Facades\FlatManager;
 use App\Http\Requests\ResidentialComplexRequest;
 use App\Http\Resources\ResidentialComplexResource;
+use App\Models\Feature;
 use App\Models\ResidentialComplex;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Get(
@@ -202,8 +206,38 @@ class ResidentialComplexController extends Controller
     {
         $filter = request()->all();
         try {
+
+            if (isset($filter['control_sum']) && $filter['control_sum'] == 1){
+                $perfectFlat = ClientManager::getFlatRecommendation(Auth::user()->client, [
+                    1 => 0,
+                    2 => 0,
+                    3 => 1,
+                    4 => 1,
+                    5 => 0,
+                    6 => 0,
+                    7 => 0,
+                    8 => 0,
+                    9 => 1,
+                    10 => 0,
+                ]);
+
+                return ResidentialComplexResource::collection(ResidentialComplex::filter(['id' => $perfectFlat->residential_complex_id])->order($filter)->get())
+                    ->additional($this->metaData(request()))->additional([
+                        'card1' => "Рядом детский сад",
+                        'card2' => "Рядом больница",
+                        'card3' => "Есть детская площадка",
+                    ]);
+            }
+            if (isset($filter['control_sum'])){
+                unset($filter['control_sum']);
+            }
+
             return ResidentialComplexResource::collection(ResidentialComplex::filter($filter)->order($filter)->get())
-                ->additional($this->metaData(request()));
+                ->additional($this->metaData(request()))->additional([
+                    'card1' => "Условия покупки",
+                    'card2' => "Рядом ТЦ",
+                    'card3' => "Рядом кафе",
+                ]);
         }
         catch (\Exception $ex){
             return response()->json([

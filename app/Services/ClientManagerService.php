@@ -99,12 +99,12 @@ class ClientManagerService
         return $samples;
     }
 
-    public function getFlatRecommendation(Client $client, Request $request){
+    public function getFlatRecommendation(Client $client, array $request){
         $values = [];
         $bestFeatureFlat = [];
 
         foreach (Feature::all() as $feature){
-            $values[$feature->id] = $request->input($feature->id);
+            $values[$feature->id] = $request[$feature->id];
             $bestFeatureFlat[$feature->id] = FeatureFlat::where('feature_id', '=', $feature->id)->orderBy('value', 'desc')->first();
         }
 

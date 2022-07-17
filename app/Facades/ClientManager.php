@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @see \App\Services\ClientManagerService
  * @method static getFlats(Client $client)
  * @method static getRequestRecommendations(Client $client)
- * @method static getFlatRecommendation(Client $client, Request $request)
+ * @method static getFlatRecommendation(Client $client, array $request)
  * @method static getAIRecommendations(Client $client)
  */
 
