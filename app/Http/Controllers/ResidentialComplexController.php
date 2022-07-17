@@ -256,7 +256,7 @@ class ResidentialComplexController extends Controller
             if (isset($filter['control_sum']) && $filter['control_sum'] == 1){
                 unset($filter['control_sum']);
                 $collection = ResidentialComplex::where('id', '=', 3)->get()->merge(
-                    ResidentialComplex::all()->skip(3)
+                    ResidentialComplex::all()->skip(3)->shuffle()
                 );
 
                 return ResidentialComplexResource::collection($collection)
