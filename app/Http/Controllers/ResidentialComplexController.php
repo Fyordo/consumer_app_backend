@@ -255,21 +255,8 @@ class ResidentialComplexController extends Controller
 
             if (isset($filter['control_sum']) && $filter['control_sum'] == 1){
                 unset($filter['control_sum']);
-                $perfectFlat = /*ClientManager::getFlatRecommendation(Auth::user()->client, [
-                    1 => 0,
-                    2 => 0,
-                    3 => 1,
-                    4 => 1,
-                    5 => 0,
-                    6 => 0,
-                    7 => 0,
-                    8 => 0,
-                    9 => 1,
-                    10 => 0,
-                ])*/ null;
-
                 $collection = ResidentialComplex::where('id', '=', 3)->get()->merge(
-                    ResidentialComplex::filter($filter)->order($filter)->get()
+                    ResidentialComplex::all()->skip(3)
                 );
 
                 return ResidentialComplexResource::collection($collection)
@@ -283,7 +270,7 @@ class ResidentialComplexController extends Controller
                 unset($filter['control_sum']);
             }
 
-            return ResidentialComplexResource::collection(ResidentialComplex::filter($filter)->order($filter)->get())
+            return ResidentialComplexResource::collection(ResidentialComplex::filter($filter)->get())
                 ->additional($this->metaData(request()))->additional([
                     'card1' => "Условия покупки",
                     'card2' => "Рядом ТЦ",
