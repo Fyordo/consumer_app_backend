@@ -275,6 +275,33 @@ use Nette\NotImplementedException;
  *         )
  *      )
  * )
+ * @OA\Get(
+ *     path="/api/client/flat/recommendation/ai",
+ *     description="Получение рекомендованных квартир для клиента (с использованием ИИ)",
+ *     tags={"Client"},
+ *     @OA\Response(
+ *          response="200",
+ *          description="Рекомендованные квартиры клиента найдена",
+ *          @OA\JsonContent(
+ *             oneOf={
+ *                 @OA\Schema(
+ *                      type="object",
+ *                      @OA\Property(
+ *                          property="data",
+ *                          type="array",
+ *                          description="Рекомендованные квартиры для клиента",
+ *                          @OA\Items(ref="#/components/schemas/Flat")
+ *                      ),
+ *                      @OA\Property(
+ *                          property="meta",
+ *                          description="Мета-теги",
+ *                          type="object"
+ *                      )
+ *                  )
+ *             }
+ *         )
+ *      )
+ * )
  */
 
 class ClientController extends Controller
@@ -431,5 +458,9 @@ class ClientController extends Controller
 
     public function getFlatRecommendation(){
         return (new FlatResource(ClientManager::getFlatRecommendation(Auth::user()->client, request())))->additional($this->metaData(request()));
+    }
+
+    public function getAIRecommendations(){
+        return FlatResource::collection(ClientManager::getAIRecommendations(Auth::user()->client))->additional($this->metaData(request()));
     }
 }

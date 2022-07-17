@@ -27,4 +27,8 @@ class Recommendation extends Model
     public function getClientAttribute(){
         return $this->client()->first();
     }
+
+    public function getRequestAttribute(){
+        return json_decode($this->request_body);
+    }
 }

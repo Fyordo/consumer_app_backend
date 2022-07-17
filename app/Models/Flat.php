@@ -101,4 +101,22 @@ class Flat extends BaseModel
             }
         }
     }
+
+    public static function getBaseFilter(){
+        return [
+            'status_id' => 0,
+            'full_space_from' => 0.0,
+            'full_space_to' => 0.0,
+            'floor_count_from' => 0.0,
+            'floor_count_to' => 0.0,
+            'living_space_from' => 0.0,
+            'living_space_to' => 0.0,
+            'balconyless_space_from' => 0.0,
+            'balconyless_space_to' => 0.0,
+            'cost_from' => 0,
+            'cost_to' => 0,
+            'height_from' => 0.0,
+            'height_to' => 0.0,
+        ];
+    }
 }

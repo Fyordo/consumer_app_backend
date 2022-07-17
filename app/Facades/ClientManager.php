@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static getFlats(Client $client)
  * @method static getRequestRecommendations(Client $client)
  * @method static getFlatRecommendation(Client $client, Request $request)
+ * @method static getAIRecommendations(Client $client)
  */
 
 class ClientManager extends Facade

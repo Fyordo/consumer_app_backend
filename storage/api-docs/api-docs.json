@@ -330,6 +330,43 @@
                 }
             }
         },
+        "/api/client/flat/recommendation/ai": {
+            "get": {
+                "tags": [
+                    "Client"
+                ],
+                "description": "Получение рекомендованных квартир для клиента (с использованием ИИ)",
+                "responses": {
+                    "200": {
+                        "description": "Рекомендованные квартиры клиента найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "Рекомендованные квартиры для клиента",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Flat"
+                                                    }
+                                                },
+                                                "meta": {
+                                                    "description": "Мета-теги",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/client/flat": {
             "get": {
                 "tags": [
