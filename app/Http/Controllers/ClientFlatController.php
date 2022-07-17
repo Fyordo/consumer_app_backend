@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
  *     path="/api/client/flat",
  *     description="Получение списка связок клиент-квартира",
  *     tags={"ClientFlat"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список связок клиент-квартира найден",
@@ -45,6 +54,15 @@ use Illuminate\Http\Request;
  *          name="flat",
  *          description="Идентификатор связки клиент-квартира",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"
@@ -86,6 +104,15 @@ use Illuminate\Http\Request;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Связка клиент-квартира добавлена",
@@ -131,6 +158,15 @@ use Illuminate\Http\Request;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Связка клиент-квартира отредактирована",
@@ -163,6 +199,15 @@ use Illuminate\Http\Request;
  *          name="flat",
  *          description="Идентификатор связки клиент-квартира",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"

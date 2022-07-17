@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Auth;
  *     path="/api/flat",
  *     description="Получение списка квартир",
  *     tags={"Flat"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список квартир найден",
@@ -48,6 +57,15 @@ use Illuminate\Support\Facades\Auth;
  *          name="flat",
  *          description="Идентификатор квартиры",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"
@@ -89,6 +107,15 @@ use Illuminate\Support\Facades\Auth;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Квартира добавлена",
@@ -134,6 +161,15 @@ use Illuminate\Support\Facades\Auth;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Квартира отредактирована",
@@ -171,6 +207,15 @@ use Illuminate\Support\Facades\Auth;
  *              format="int64"
  *          )
  *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Квартира удалёна",
@@ -200,6 +245,15 @@ use Illuminate\Support\Facades\Auth;
  *          name="flat",
  *          description="Идентификатор квартиры, график которой будет построен",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"

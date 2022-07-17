@@ -19,6 +19,15 @@ use Nette\NotImplementedException;
  *     path="/api/message",
  *     description="Получение списка сообщений",
  *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список сообщений найден",
@@ -51,6 +60,15 @@ use Nette\NotImplementedException;
  *          name="message",
  *          description="Идентификатор сообщения",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"
@@ -92,6 +110,15 @@ use Nette\NotImplementedException;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Сообщение добавлено",
@@ -137,6 +164,15 @@ use Nette\NotImplementedException;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Сообщение отредактировано",
@@ -174,6 +210,15 @@ use Nette\NotImplementedException;
  *              format="int64"
  *          )
  *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Сообщение удалено",
@@ -200,10 +245,28 @@ use Nette\NotImplementedException;
  *     path="/api/message/send",
  *     description="Отправить сообщение",
  *     tags={"Message"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Сообщение отправлено",
- *          @OA\Response(
+ *          @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Response(
  *          response="200",
  *          description="Сообщение отредактировано",
  *          @OA\JsonContent(

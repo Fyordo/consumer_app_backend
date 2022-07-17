@@ -11,6 +11,17 @@
                     "Client"
                 ],
                 "description": "Получение списка клиентов",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список клиентов найден",
@@ -46,6 +57,17 @@
                     "Client"
                 ],
                 "description": "Добавить клиента",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -97,6 +119,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -135,6 +166,15 @@
                         "name": "client",
                         "in": "path",
                         "description": "Идентификатор клиента",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
                         "schema": {
                             "type": "integer",
                             "format": "int64"
@@ -190,6 +230,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -225,6 +274,17 @@
                     "Client"
                 ],
                 "description": "Получение списка квартир клиента",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список квартир клиента найден",
@@ -262,6 +322,17 @@
                     "Client"
                 ],
                 "description": "Получение рекомендованных квартир клиента",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список рекомендованных квартир клиента найден",
@@ -299,6 +370,17 @@
                     "Client"
                 ],
                 "description": "Получение рекомендованной квартиры для клиента",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Рекомендованная квартира клиента найдена",
@@ -330,49 +412,23 @@
                 }
             }
         },
-        "/api/client/flat/recommendation/ai": {
-            "get": {
-                "tags": [
-                    "Client"
-                ],
-                "description": "Получение рекомендованных квартир для клиента (с использованием ИИ)",
-                "responses": {
-                    "200": {
-                        "description": "Рекомендованные квартиры клиента найдена",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "oneOf": [
-                                        {
-                                            "properties": {
-                                                "data": {
-                                                    "description": "Рекомендованные квартиры для клиента",
-                                                    "type": "array",
-                                                    "items": {
-                                                        "$ref": "#/components/schemas/Flat"
-                                                    }
-                                                },
-                                                "meta": {
-                                                    "description": "Мета-теги",
-                                                    "type": "object"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/client/flat": {
             "get": {
                 "tags": [
                     "ClientFlat"
                 ],
                 "description": "Получение списка связок клиент-квартира",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список связок клиент-квартира найден",
@@ -408,6 +464,17 @@
                     "ClientFlat"
                 ],
                 "description": "Добавить связку клиент-квартира",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -459,6 +526,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -497,6 +573,15 @@
                         "name": "flat",
                         "in": "path",
                         "description": "Идентификатор связки клиент-квартира",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
                         "schema": {
                             "type": "integer",
                             "format": "int64"
@@ -552,6 +637,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -587,6 +681,17 @@
                     "Flat"
                 ],
                 "description": "Получение списка квартир",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список квартир найден",
@@ -622,6 +727,17 @@
                     "Flat"
                 ],
                 "description": "Добавить квартиру",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -673,6 +789,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -711,6 +836,15 @@
                         "name": "flat",
                         "in": "path",
                         "description": "Идентификатор квартиры",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
                         "schema": {
                             "type": "integer",
                             "format": "int64"
@@ -766,6 +900,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -810,6 +953,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -849,6 +1001,17 @@
                     "Message"
                 ],
                 "description": "Получение списка сообщений",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список сообщений найден",
@@ -884,6 +1047,17 @@
                     "Message"
                 ],
                 "description": "Добавить сообщение",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -935,6 +1109,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -973,6 +1156,15 @@
                         "name": "message",
                         "in": "path",
                         "description": "Идентификатор сообщения",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
                         "schema": {
                             "type": "integer",
                             "format": "int64"
@@ -1028,6 +1220,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -1063,6 +1264,17 @@
                     "Message"
                 ],
                 "description": "Отправить сообщение",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Сообщение отправлено"
@@ -1076,6 +1288,17 @@
                     "ResidentialComplex"
                 ],
                 "description": "Получение списка ЖК",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Список ЖК найден",
@@ -1111,6 +1334,17 @@
                     "ResidentialComplex"
                 ],
                 "description": "Добавить ЖК",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1162,6 +1396,15 @@
                             "type": "integer",
                             "format": "int64"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
@@ -1200,6 +1443,15 @@
                         "name": "complex",
                         "in": "path",
                         "description": "Идентификатор ЖК",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
                         "schema": {
                             "type": "integer",
                             "format": "int64"
@@ -1251,6 +1503,15 @@
                         "name": "complex",
                         "in": "path",
                         "description": "Идентификатор ЖК",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Идентификатор пользователя",
                         "schema": {
                             "type": "integer",
                             "format": "int64"

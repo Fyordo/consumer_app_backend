@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Auth;
  *     path="/api/complex",
  *     description="Получение списка ЖК",
  *     tags={"ResidentialComplex"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список ЖК найден",
@@ -50,6 +59,15 @@ use Illuminate\Support\Facades\Auth;
  *          name="complex",
  *          description="Идентификатор ЖК",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"
@@ -91,6 +109,15 @@ use Illuminate\Support\Facades\Auth;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="ЖК добавлен",
@@ -136,6 +163,15 @@ use Illuminate\Support\Facades\Auth;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="ЖК отредактирован",
@@ -168,6 +204,15 @@ use Illuminate\Support\Facades\Auth;
  *          name="complex",
  *          description="Идентификатор ЖК",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"

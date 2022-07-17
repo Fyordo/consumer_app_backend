@@ -18,6 +18,15 @@ use Nette\NotImplementedException;
  *     path="/api/client",
  *     description="Получение списка клиентов",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список клиентов найден",
@@ -50,6 +59,15 @@ use Nette\NotImplementedException;
  *          name="client",
  *          description="Идентификатор клиента",
  *          in="path",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
  *          @OA\Schema(
  *              type="integer",
  *              format="int64"
@@ -91,6 +109,15 @@ use Nette\NotImplementedException;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Клиент добавлен",
@@ -136,6 +163,15 @@ use Nette\NotImplementedException;
  *             )
  *         )
  *     ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Клиент отредактирован",
@@ -173,6 +209,15 @@ use Nette\NotImplementedException;
  *              format="int64"
  *          )
  *      ),
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Клиент удалён",
@@ -198,6 +243,15 @@ use Nette\NotImplementedException;
  *     path="/api/client/flats",
  *     description="Получение списка квартир клиента",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список квартир клиента найден",
@@ -225,6 +279,15 @@ use Nette\NotImplementedException;
  *     path="/api/client/recommendations",
  *     description="Получение рекомендованных квартир клиента",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Список рекомендованных квартир клиента найден",
@@ -252,6 +315,15 @@ use Nette\NotImplementedException;
  *     path="/api/client/flat/recommendation",
  *     description="Получение рекомендованной квартиры для клиента",
  *     tags={"Client"},
+ *     @OA\Parameter(
+ *          name="token",
+ *          description="Идентификатор пользователя",
+ *          in="header",
+ *          @OA\Schema(
+ *              type="integer",
+ *              format="int64"
+ *          )
+ *      ),
  *     @OA\Response(
  *          response="200",
  *          description="Рекомендованная квартира клиента найдена",
@@ -263,33 +335,6 @@ use Nette\NotImplementedException;
  *                          property="data",
  *                          type="array",
  *                          description="Рекомендованная квартира клиента",
- *                          @OA\Items(ref="#/components/schemas/Flat")
- *                      ),
- *                      @OA\Property(
- *                          property="meta",
- *                          description="Мета-теги",
- *                          type="object"
- *                      )
- *                  )
- *             }
- *         )
- *      )
- * )
- * @OA\Get(
- *     path="/api/client/flat/recommendation/ai",
- *     description="Получение рекомендованных квартир для клиента (с использованием ИИ)",
- *     tags={"Client"},
- *     @OA\Response(
- *          response="200",
- *          description="Рекомендованные квартиры клиента найдена",
- *          @OA\JsonContent(
- *             oneOf={
- *                 @OA\Schema(
- *                      type="object",
- *                      @OA\Property(
- *                          property="data",
- *                          type="array",
- *                          description="Рекомендованные квартиры для клиента",
  *                          @OA\Items(ref="#/components/schemas/Flat")
  *                      ),
  *                      @OA\Property(
