@@ -53,7 +53,7 @@ class ResidentialComplexResource extends JsonResource
             'address' => $this->address,
             'min_cost' => $this->when($this->flats, Flat::where('flats.residential_complex_id', '=', $this->id)->orderBy('cost', 'asc')->first()->cost),
             'updated_at' => strtotime($this->updated_at),
-            'flats' => $this->when($this->flats, FlatResource::collection($this->flats))
+            'flats' => []//$this->when($this->flats, FlatResource::collection($this->flats))
         ];
     }
 }

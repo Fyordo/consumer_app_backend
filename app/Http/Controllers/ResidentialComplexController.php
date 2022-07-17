@@ -7,6 +7,7 @@ use App\Facades\FlatManager;
 use App\Http\Requests\ResidentialComplexRequest;
 use App\Http\Resources\ResidentialComplexResource;
 use App\Models\Feature;
+use App\Models\Flat;
 use App\Models\ResidentialComplex;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -209,7 +210,7 @@ class ResidentialComplexController extends Controller
 
             if (isset($filter['control_sum']) && $filter['control_sum'] == 1){
                 unset($filter['control_sum']);
-                $perfectFlat = ClientManager::getFlatRecommendation(Auth::user()->client, [
+                $perfectFlat = /*ClientManager::getFlatRecommendation(Auth::user()->client, [
                     1 => 0,
                     2 => 0,
                     3 => 1,
@@ -220,9 +221,9 @@ class ResidentialComplexController extends Controller
                     8 => 0,
                     9 => 1,
                     10 => 0,
-                ]);
+                ])*/ null;
 
-                $collection = ResidentialComplex::filter(['id' => $perfectFlat->residential_complex_id])->get()->merge(
+                $collection = ResidentialComplex::where('id', '=', 3)->get()->merge(
                     ResidentialComplex::filter($filter)->order($filter)->get()
                 );
 
