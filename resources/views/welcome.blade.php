@@ -25,10 +25,6 @@
 <body>
 <div class="container">
     <div id="images">
-        <div class="about1">
-            <img src="{{URL::asset('favicon.ico')}}" width="100" height="100" alt="">
-        </div>
-
         <div class="about2" align="right">
             <h3>Иванов И.И.</h3>
         </div>
